@@ -1,17 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <nav>
+      <div>
+        <b-navbar type="dark" variant="dark">
+          <b-navbar-nav>
+            <b-nav-item @click="selectedTab('view')">View</b-nav-item>
+            <b-nav-item @click="selectedTab('upload')">Upload</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar>
+      </div>
+    </nav>
+   
+   
+    <ViewComponent  v-if="tab==='view'"/>
+    <UploadComponent  v-if="tab==='upload'"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import ViewComponent from './components/view.vue'
+import UploadComponent from './components/upload.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+   UploadComponent,
+    ViewComponent
+  }, data() {
+    return {
+      tab: 'view'
+    }
+  },
+  methods: {
+    selectedTab(option){
+      this.tab = option
+      console.log(this.tab)
+    }
   }
 }
 </script>
@@ -23,6 +48,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  
 }
 </style>
